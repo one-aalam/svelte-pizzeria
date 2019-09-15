@@ -39,3 +39,26 @@ function fetch(url, requestInit) {
 }
 
 export { fetch }
+
+
+    // var payload = {};
+    // var requestInit = {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(payload)
+    // };
+    // fetch(url, requestInit)
+    // .then(function(response) {
+    //     if (!response.ok) {
+    //     throw Error(response.statusText);
+    //     }
+    //     return response.json();
+    // })
+    // .then(function(json) {
+    //     console.log(json);
+    // })
+    // .catch(function(error) {
+    //     console.log(error);
+    // });
