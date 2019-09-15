@@ -1,6 +1,6 @@
 <script>
     import Icon  from 'svelte-awesome/components/Icon.svelte';
-    import { shoppingBag, plus, minus } from 'svelte-awesome/icons';
+    import { plus, minus } from 'svelte-awesome/icons';
     import { createEventDispatcher } from 'svelte';
     import { fly } from 'svelte/transition';
 
@@ -11,18 +11,14 @@
 
     const dispatch = createEventDispatcher();
 
-    function addPizza() {
+    function addPizza(event) {
         count += 1;
-        dispatch('addPizza', {
-            id: id
-        });
+        dispatch('addPizza', pizza);
     }
 
-    function remPizza() {
+    function remPizza(event) {
         count -= 1;
-        dispatch('remPizza', {
-            id: id
-        });
+        dispatch('remPizza', pizza);
     }
 
 </script>

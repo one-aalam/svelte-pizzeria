@@ -1,4 +1,10 @@
 <script>
+    import { setContext } from 'svelte';
+    import { writable } from 'svelte/store';
+
+    const cart = writable([]);
+    setContext('cart', cart);
+
     import { Router, Route } from "svelte-routing";
     import AppHeader from './components/AppHeader.svelte';
     import AppFooter from './components/AppFooter.svelte';
