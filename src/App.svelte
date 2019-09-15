@@ -7,10 +7,10 @@
 </script>
 
 <Router url="{url}">
-  <nav>
+  <!-- <nav>
     <NavLink to="/">Home</NavLink>
     <NavLink to="about">About</NavLink>
-  </nav>
+  </nav> -->
   <div>
     <Route path="about" component="{About}" />
     <!-- <Route path="blog/*" component="{Blog}" /> -->
