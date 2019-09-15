@@ -3,15 +3,8 @@ import App from './App.svelte';
 const app = new App({
 	target: document.body,
 	props: {
-		name: 'world'
+		name: 'svelte-pizzeria'
 	},
-	data: {
-		name: 'iaiaffaf',
-		coll: 'hdigaigf'
-	}
 });
-
-
-let name = 'hajhafa';
 
 export default app;

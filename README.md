@@ -54,6 +54,9 @@ npm run build
 surge public
 ```
 
+### Thanks
+Data Source: https://github.com/IdeaBlade/zza.data
+
 ####Note
 Please do a `yarn import` before running `yarn dev` if you prefer `yarn` as a package manager. Due to the missing
 `audit` commands in yarn, `npm` is primarily used and `yarn.lock` might not be in sync
