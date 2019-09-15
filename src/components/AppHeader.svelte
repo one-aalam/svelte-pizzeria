@@ -1,5 +1,12 @@
 <script>
+    import { getContext } from 'svelte';
+    import Icon  from 'svelte-awesome/components/Icon.svelte';
+    import { shoppingBag } from 'svelte-awesome/icons';
     import NavLink from "./NavLink.svelte";
+
+    const cart = getContext('cart')
+    $: cartItemCount = $cart.length;
+
 </script>
 <div class="w-full max-w-screen-xl relative mx-auto px-6 pt-12 pb-12 lg:border-b-2 lg:border-gray-200 sticky">
     <div class="xl:flex -mx-6">
@@ -16,5 +23,10 @@
                 </ul>
               </nav>
         </div>
+        <div class="sticky">
+    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+        <Icon data={shoppingBag} scale={3}></Icon> {cartItemCount}
+    </button>
+</div>
     </div>
 </div>

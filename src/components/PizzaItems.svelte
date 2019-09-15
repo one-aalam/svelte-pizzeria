@@ -18,7 +18,6 @@
         const itemsOtherThanId = $cart.filter(cartItem => cartItem.id !== detail.id);
         $cart = [...itemsOtherThanId, ...restOfTheItemWithId];
     }
-    $: cartItemCount = $cart.length;
 </script>
 
 <style>
@@ -32,11 +31,7 @@
     }
 </style>
 
-<div class="sticky">
-    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-        <Icon data={shoppingBag} scale={3}></Icon> {cartItemCount}
-    </button>
-</div>
+
 <div class="pizza-list container mx-auto relative">
     {#each items as pizza, index (pizza.id)}
         <div class="pizza-item">
