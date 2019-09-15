@@ -30,7 +30,7 @@
 </style>
 
 
-<div class="pizza-list container mx-auto pt-12">
+<div class="pizza-list container mx-auto">
     {#each items as pizza, index (pizza.id)}
         <div class="pizza-item">
             <PizzaItem {pizza} on:addPizza={addToCart}/>
