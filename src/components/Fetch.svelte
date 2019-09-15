@@ -11,3 +11,12 @@
   });
 </script>
 <slot {data} />
+
+    <!-- <Fetch url="https://jsonplaceholder.typicode.com/todos" let:data>
+          <h1>A list of todos</h1>
+            <ul>
+                {#each data as link}
+                <li>{link.title}</li>
+                {/each}
+            </ul>
+    </Fetch> -->
