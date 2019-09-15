@@ -1,19 +1,26 @@
 <script>
     import Icon  from 'svelte-awesome/components/Icon.svelte';
-    // import { add } from 'svelte-awesome/icons';
+    import { shoppingBag, plus, minus } from 'svelte-awesome/icons';
     import { createEventDispatcher } from 'svelte';
     import { fly } from 'svelte/transition';
 
     export let pizza = {};
     export let added;
+    export let allowOneOnly = false;
     let count = 0;
 
     const dispatch = createEventDispatcher();
 
     function addPizza() {
         count += 1;
-        console.log(count);
         dispatch('addPizza', {
+            id: id
+        });
+    }
+
+    function remPizza() {
+        count -= 1;
+        dispatch('remPizza', {
             id: id
         });
     }
@@ -39,21 +46,34 @@
         </div>
         <div class="pizza-item__name text-2xl bg-yellow-500 px-4 shadow-md font-bold text-center -m-2 z-10 rotate-10">{pizza.name}</div>
         {#if count}
-            <button
-                class:opacity-50={count}
-                class:cursor-not-allowed={count}
-                class="mt-8 rounded-full px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-teal-600 text-white border-teal-500 hover:border-transparent  md:text-lg xl:text-base font-semibold leading-tight shadow-md"
-            >
-            <!-- <Icon data={add} scale="2"></Icon> -->
-            added
-            </button>
+            {#if allowOneOnly}
+                <button
+                    class:opacity-50={count}
+                    class:cursor-not-allowed={count}
+                    class="mt-8 rounded-full px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-teal-600 text-white border-teal-500 hover:border-transparent  md:text-lg xl:text-base font-semibold leading-tight shadow-md"
+                >
+                    added
+                </button>
+            {:else}
+                <div class="inline-flex mt-8">
+                    <button on:click={remPizza} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l-full">
+                        <Icon data={minus}></Icon>
+                    </button>
+                    <!-- <input class="px-4 py-3 w-16" type="text" bind:value={count} /> -->
+                    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                        {count}
+                    </button>
+                    <button on:click={addPizza} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r-full">
+                        <Icon data={plus}></Icon>
+                    </button>
+                </div>
+            {/if}
         {:else}
             <button 
                 class="mt-8 rounded-full px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3  bg-transparent hover:bg-teal-600 hover:text-white border-teal-500 hover:border-transparent  md:text-lg xl:text-base font-semibold leading-tight shadow-md"
                 on:click={addPizza}
             >
-            <!-- <Icon data={add} scale="2"></Icon> -->
-            add to box
+            <Icon data={plus}></Icon> buy
             </button>
         {/if}
 
