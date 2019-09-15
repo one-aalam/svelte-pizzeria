@@ -20,11 +20,8 @@
 
 <style>
     .pizza-list {
-        width: calc(100vw - 200px);
         height: auto;
         min-height: calc(100vh);
-        max-width: 1024px;
-        margin-left: 150px;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-column-gap: 30px;
@@ -33,7 +30,7 @@
 </style>
 
 
-<div class="pt-12 pizza-list">
+<div class="pizza-list container mx-auto pt-12">
     {#each items as pizza, index (pizza.id)}
         <div class="pizza-item">
             <PizzaItem {pizza} on:addPizza={addToCart}/>

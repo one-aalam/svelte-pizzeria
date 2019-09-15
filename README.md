@@ -1,6 +1,8 @@
-# Svelte ToDo
+# Svelte Pizzeria
 A Pizza shop Svelte 3/Rollup.
 Available at: https://optimistic-euclid-892bac.netlify.com
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/42d3cdab-c366-4fb9-8527-9b9da11ad9bc/deploy-status)](https://app.netlify.com/sites/optimistic-euclid-892bac/deploys)
 
 `Scaffolded from https://github.com/one-aalam/svelte-todo.git`
 

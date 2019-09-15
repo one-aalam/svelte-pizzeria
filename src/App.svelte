@@ -1,5 +1,6 @@
 <script>
     import { Router, Route } from "svelte-routing";
+    import AppHeader from './components/AppHeader.svelte';
     import NavLink from "./components/NavLink.svelte";
     import About from "./pages/About.svelte";
     import Home from "./pages/Home.svelte";
@@ -11,9 +12,10 @@
     <NavLink to="/">Home</NavLink>
     <NavLink to="about">About</NavLink>
   </nav> -->
+  <AppHeader />
   <div>
     <Route path="about" component="{About}" />
-    <!-- <Route path="blog/*" component="{Blog}" /> -->
+    <!-- <Route path="pizza/*" component="{Pizza}" /> -->
     <Route path="/" component="{Home}" />
   </div>
 </Router>

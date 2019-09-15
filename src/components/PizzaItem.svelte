@@ -38,7 +38,6 @@
             <img class="object-cover h-48 w-full" src={`images/${pizza.image}`} title={pizza.name} alt={pizza.name} />
         </div>
         <div class="pizza-item__name text-2xl bg-yellow-500 px-4 shadow-md font-bold text-center -m-2 z-10 rotate-10">{pizza.name}</div>
-        <!-- <input type="checkbox" bind:checked={added} on:change={addPizza}> -->
         {#if count}
             <button
                 class:opacity-50={count}
