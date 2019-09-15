@@ -2,9 +2,9 @@
   "name": "svelte-pizzeria",
   "version": "1.0.0",
   "main": "babel.config.js",
-	"directories": {
-		"test": "test"
-	},
+  "directories": {
+    "test": "test"
+  },
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
