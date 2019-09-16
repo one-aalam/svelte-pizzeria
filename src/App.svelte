@@ -8,8 +8,9 @@
     import { Router, Route } from "svelte-routing";
     import AppHeader from './components/AppHeader.svelte';
     import AppFooter from './components/AppFooter.svelte';
-    import About from "./pages/About.svelte";
-    import Home from "./pages/Home.svelte";
+    import DrinkPage from "./pages/DrinkPage.svelte";
+    import SaladPage from "./pages/SaladPage.svelte";
+    import PizzaPage from "./pages/PizzaPage.svelte";
     export let url = "";
 </script>
 
@@ -17,9 +18,10 @@
 <Router url="{url}">
   <AppHeader />
   <div>
-    <Route path="about" component="{About}" />
+    <Route path="drinks" component="{DrinkPage}" />
+    <Route path="salads" component="{SaladPage}" />
     <!-- <Route path="pizza/*" component="{Pizza}" /> -->
-    <Route path="/" component="{Home}" />
+    <Route path="/" component="{PizzaPage}" />
   </div>
 </Router>
 <AppFooter/>

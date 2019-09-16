@@ -15,10 +15,19 @@
               <nav>
                  <ul class="flex">
                     <li class="flex-1 mr-2 text-center">
-                        <NavLink to="/" class="text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white">Home</NavLink>
+                        <NavLink to="/" class="text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white">
+                            Pizzas
+                        </NavLink>
                     </li>
                     <li class="flex-1 mr-2 text-center">
-                        <NavLink to="about" class="text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4">About</NavLink>
+                        <NavLink to="drinks" class="text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4">
+                            Drinks
+                        </NavLink>
+                    </li>
+                    <li class="flex-1 mr-2 text-center">
+                        <NavLink to="salads" class="text-center block border border-white rounded hover:border-gray-200 text-blue-500 hover:bg-gray-200 py-2 px-4">
+                            Salads
+                        </NavLink>
                     </li>
                 </ul>
               </nav>
