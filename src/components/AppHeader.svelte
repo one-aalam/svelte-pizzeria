@@ -1,13 +1,13 @@
 <script>
-    import { getContext } from 'svelte';
+    import { getContext, onMount, onDestroy } from 'svelte';
     import Icon  from 'svelte-awesome/components/Icon.svelte';
     import { shoppingBag } from 'svelte-awesome/icons';
     // pizzaSlice, carrot, cocktail
     import NavLink from "./NavLink.svelte";
+    import { sticky } from '../actions/sticky';
 
     const cart = getContext('cart')
     $: cartItemCount = $cart.length;
-
 </script>
 
 <style>
@@ -16,7 +16,7 @@
         font-weight: bold;
     }
 </style>
-<div class="w-full max-w-screen-xl relative mx-auto px-6 pt-12 pb-12 lg:border-b-2 lg:border-gray-200 sticky">
+<div use:sticky class="z-20 top-0 bg-white w-full max-w-screen-xl relative mx-auto px-6 pt-12 pb-12 lg:border-b-2 lg:border-gray-200 sticky">
     <div class="xl:flex -mx-6">
         <div class="px-6 text-left md:text-center xl:text-left max-w-2xl md:max-w-3xl mx-auto">
             <h1 class="text-3xl sm:text-4xl md:text-5xl xl:text-4xl font-light leading-tight"><strong>Svelte</strong> <span class="text-teal-500 font-normal">Pizzeria</span></h1>
@@ -41,7 +41,7 @@
               </nav>
         </div>
         <div class="sticky">
-    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow">
         <Icon data={shoppingBag} scale={3}></Icon> {cartItemCount}
     </button>
 </div>
