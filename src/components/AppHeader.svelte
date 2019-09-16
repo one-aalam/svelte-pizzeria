@@ -41,8 +41,13 @@
               </nav>
         </div>
         <div class="sticky">
-    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow">
-        <Icon data={shoppingBag} scale={3}></Icon> {cartItemCount}
+    <button class="w-16 h-16 mr-16 bg-green hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow">
+        <div class="relative">
+            <Icon data={shoppingBag} scale={2}></Icon>
+            <div class="absolute w-6 h-6 top-0 right-0 text-white bg-yellow-700 rounded-full">
+                 {cartItemCount}
+            </div>
+        </div>
     </button>
 </div>
     </div>
