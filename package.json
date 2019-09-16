@@ -28,6 +28,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "shortid": "^2.2.15",
     "svelte-awesome": "^2.2.0",
     "svelte-routing": "^1.4.0"
   },

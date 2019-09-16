@@ -11,6 +11,7 @@
     import DrinkPage from "./pages/DrinkPage.svelte";
     import SaladPage from "./pages/SaladPage.svelte";
     import PizzaPage from "./pages/PizzaPage.svelte";
+    import CartPage from "./pages/CartPage.svelte";
     export let url = "";
 </script>
 
@@ -20,6 +21,7 @@
   <div>
     <Route path="drinks" component="{DrinkPage}" />
     <Route path="salads" component="{SaladPage}" />
+    <Route path="cart" component="{CartPage}" />
     <!-- <Route path="pizza/*" component="{Pizza}" /> -->
     <Route path="/" component="{PizzaPage}" />
   </div>

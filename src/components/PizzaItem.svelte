@@ -7,7 +7,7 @@
     export let pizza = {};
     export let added;
     export let allowOneOnly = false;
-    let count = 0;
+    export let count = 0;
 
     const dispatch = createEventDispatcher();
 
@@ -20,6 +20,8 @@
         count -= 1;
         dispatch('remPizza', pizza);
     }
+
+    console.log(pizza);
 
 </script>
 

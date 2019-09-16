@@ -1,7 +1,9 @@
+import shortid from 'shortid';
+
 const seedId = 0;
 export const setProduct = (p, type) => {
     let product = { ...p };
-    product.id = seedId + 1;
+    product.id = shortid.generate();
     product.type = type;
     product.image = product.name.toLowerCase().replace(/\s/g, '')+'.jpg';
 
