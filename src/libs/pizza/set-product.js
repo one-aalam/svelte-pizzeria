@@ -1,6 +1,5 @@
 import shortid from 'shortid';
 
-const seedId = 0;
 export const setProduct = (p, type) => {
     let product = { ...p };
     product.id = shortid.generate();
@@ -18,3 +17,13 @@ export const setProduct = (p, type) => {
     }
     return product;
 };
+
+export const setProductOption = (o, type) => {
+    let option = { ...o };
+    option.id = shortid.generate();
+    option.type = type;
+    option.isPizzaOption = option.isPizzaOption === undefined ?  true : option.isPizzaOption;
+    option.isSaladOption = option.isSaladOption === undefined ?  true : option.isSaladOption;
+    option.factor = option.factor === undefined ? ((option.name.indexOf('*') === -1) ? 1 : 2) : option.factor ;
+    return option;
+}
