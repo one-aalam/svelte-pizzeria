@@ -1,8 +1,6 @@
 <script>
     import { setContext } from 'svelte';
-    import { writable } from 'svelte/store';
-
-    const cart = writable([]);
+    import { cart } from './stores/cart.store';
     setContext('cart', cart);
 
     import { Router, Route } from "svelte-routing";
@@ -13,6 +11,7 @@
     import PizzaPage from "./pages/PizzaPage.svelte";
     import CartPage from "./pages/CartPage.svelte";
     export let url = "";
+    setContext('cart', cart);
 </script>
 
 

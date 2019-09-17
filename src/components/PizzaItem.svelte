@@ -21,8 +21,6 @@
         dispatch('remPizza', pizza);
     }
 
-    console.log(pizza);
-
 </script>
 
 <style>

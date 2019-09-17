@@ -41,7 +41,7 @@ export const pizzaSizes = [
 
         // $4.50  markup for gluten free.
         {id: 6, type: PRD_TYPE_PIZZA, name:"Gluten Free 12\"", price: 16.90, premiumPrice: 21.45, toppingPrice: 1.35, isGlutenFree: true}
-    ];
+];
 
 export const saladSizes = [
         {id: 7, type: PRD_TYPE_SALAD, name: "Side", price: 3.95, toppingPrice: 0.65},
