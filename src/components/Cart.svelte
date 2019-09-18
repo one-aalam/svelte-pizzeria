@@ -11,8 +11,6 @@
     import { fetch } from '../libs/fetch';
     import PizzaListItem from './PizzaListItem.svelte';
 
-
-    // Create a Stripe client.
     const stripe = Stripe('pk_test_SjNnPE3k5y6TQegY3ln6vF1F00CS8Y2c0N');
     // Create an instance of Elements.
     const elements = stripe.elements();
@@ -90,21 +88,6 @@
                 }
             });
         });
-
-
-        // Submit the form with the token ID.
-        function stripeTokenHandler(token) {
-            // Insert the token ID into the form so it gets submitted to the server
-            // var form = document.getElementById('payment-form');
-            // var hiddenInput = document.createElement('input');
-            // hiddenInput.setAttribute('type', 'hidden');
-            // hiddenInput.setAttribute('name', 'stripeToken');
-            // hiddenInput.setAttribute('value', token.id);
-            // form.appendChild(hiddenInput);
-
-            // Submit the form
-            // form.submit();
-        }
     });
 
     const to = '/'

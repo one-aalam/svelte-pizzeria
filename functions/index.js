@@ -11,7 +11,7 @@ const headers = {
   'Access-Control-Allow-Credentials': 'true'
 }
 
-exports.handler = async(event, context) => {
+exports.handler = async (event, context) => {
   if (!event.body || event.httpMethod !== "POST") {
     return {
       statusCode: 400,
@@ -44,13 +44,26 @@ exports.handler = async(event, context) => {
     .then(customer => {
       console.log(`Customer created and starting the charges, amt: ${data.stripeAmt}, email: ${data.stripeEmail}`)
 
-      return await stripe.charges.create({
+      stripe.charges.create({
           amount: data.stripeAmt,
           currency: 'usd',
           description: 'Example charge',
           source: data.stripeToken,
           receipt_email: data.stripeEmail,
           customer: customer.id,
-        },{ idempotency_key: data.stripeIdempotency });
+        },{ idempotency_key: data.stripeIdempotency }, (err, charge) => {
+          if (err) {
+            return {
+              statusCode: 400,
+              headers,
+              body: err
+            }
+          }
+          return {
+            statusCode: 200,
+            headers,
+            body: charge
+          }
+        });
     });
 }
