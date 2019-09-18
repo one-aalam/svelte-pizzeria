@@ -3,6 +3,7 @@
     import { get, derived } from 'svelte/store';
     import { Link } from "svelte-routing";
     import shortid from 'shortid';
+    import axios from 'axios';
     import Icon  from 'svelte-awesome/components/Icon.svelte';
     import { shoppingBag } from 'svelte-awesome/icons';
 
