@@ -47,8 +47,7 @@ exports.handler = async (event, context) => {
       console.log(
         `starting the charges, amt: ${data.stripeAmt}, email: ${data.stripeEmail}`
       )
-      return stripe.charges
-        .create(
+      return stripe.charges.create(
           {
             currency: "usd",
             amount: data.stripeAmt,
