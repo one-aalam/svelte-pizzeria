@@ -61,6 +61,8 @@ exports.handler = async (event, context) => {
         )
         .then(result => {
           console.log(`Charge created: ${result}`)
+        }, reason => {
+          console.log(`Charge issue:`, reason)
         })
     });
   } catch (e) {
