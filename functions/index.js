@@ -11,15 +11,15 @@ const headers = {
   'Access-Control-Allow-Credentials': 'true'
 }
 
-exports.handler = async (event, context) => {
+exports.handler = (event, context, callback) => {
   if (!event.body || event.httpMethod !== "POST") {
-    return {
+    callback({
       statusCode: 400,
       headers,
       body: JSON.stringify({
         status: "invalid http method"
       })
-    }
+    });
   }
 
   const data = JSON.parse(event.body)
@@ -27,13 +27,13 @@ exports.handler = async (event, context) => {
   if (!data.stripeToken || !data.stripeAmt || !data.stripeIdempotency) {
     console.error("Required information is missing.")
 
-    return {
+    callback({
       statusCode: 400,
       headers,
       body: JSON.stringify({
         status: "missing information"
       })
-    }
+    })
   }
 
   stripe.customers
@@ -41,29 +41,28 @@ exports.handler = async (event, context) => {
       email: data.stripeEmail,
       source: data.stripeToken
     })
-    .then(customer => {
-      console.log(`Customer created and starting the charges, amt: ${data.stripeAmt}, email: ${data.stripeEmail}`)
-
-      stripe.charges.create({
-          amount: data.stripeAmt,
-          currency: 'usd',
-          description: 'Example charge',
-          source: data.stripeToken,
-          receipt_email: data.stripeEmail,
-          customer: customer.id,
-        },{ idempotency_key: data.stripeIdempotency }, (err, charge) => {
-          if (err) {
-            return {
-              statusCode: 400,
-              headers,
-              body: err
-            }
-          }
-          return {
-            statusCode: 200,
-            headers,
-            body: charge
-          }
-        });
+    .then(customer => stripe.charges.create({
+        amount: data.stripeAmt,
+        currency: 'usd',
+        description: 'Example charge',
+        source: data.stripeToken,
+        receipt_email: data.stripeEmail,
+        customer: customer.id,
+      },{
+        idempotency_key: data.stripeIdempotency
+    }))
+    .then(charge => callback(null, {
+      statusCode: 200,
+      body: charge
+    }))
+    .catch(err => {
+        console.log("Error:", err);
+        callback({
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({
+            status: "Purchase failed"
+          })
+        })
     });
 }
