@@ -30,6 +30,7 @@
   "dependencies": {
     "dotenv": "^8.1.0",
     "shortid": "^2.2.15",
+    "stripe": "^7.9.1",
     "svelte-awesome": "^2.2.0",
     "svelte-routing": "^1.4.0"
   },
