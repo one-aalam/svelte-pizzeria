@@ -74,19 +74,30 @@
                             stripeIdempotency: shortid.generate()
                         }
                     };
-                    fetch('https://optimistic-euclid-892bac.netlify.com/.netlify/functions/index', requestInit)
-                    .then(function(response) {
-                        if (!response.ok) {
-                        throw Error(response.statusText);
-                        }
-                        return response.json();
-                    })
-                    .then(function(json) {
-                        console.log(json);
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                    });
+                    try {
+                        axios
+                            .post(
+                                "https://optimistic-euclid-892bac.netlify.com/.netlify/functions/index",
+                                {
+                                    stripeEmail: 'one@somemail.com',
+                                    stripeAmt: 23,
+                                    stripeToken: result.token.id,
+                                    stripeIdempotency: shortid.generate()
+                                },
+                                {
+                                    headers: {
+                                        "Content-Type": "application/json"
+                                    }
+                                }
+                            ).then(res => {
+                                console.log(res);
+                                if (res.status === 200) {
+                                    console.log(res)
+                                }
+                            });
+                    } catch(err) {
+                        console.log(er)
+                    }
                 }
             });
         });
