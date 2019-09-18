@@ -11,7 +11,7 @@ const headers = {
   'Access-Control-Allow-Credentials': 'true'
 }
 
-exports.handler = async (event, context) => {
+exports.handler = (event, context) => {
   if (!event.body || event.httpMethod !== "POST") {
     return {
       statusCode: 400,
@@ -36,36 +36,36 @@ exports.handler = async (event, context) => {
     }
   }
 
-  // stripe payment processing begins here
-  try {
-    await stripe.customers
+  stripe.customers
     .create({
       email: data.stripeEmail,
       source: data.stripeToken
     })
     .then(customer => {
-      console.log(
-        `starting the charges, amt: ${data.stripeAmt}, email: ${data.stripeEmail}`
-      )
-      return stripe.charges.create(
-          {
+      console.log(`Customer created and starting the charges, amt: ${data.stripeAmt}, email: ${data.stripeEmail}`)
+      stripe.charges.create({
             currency: "usd",
             amount: data.stripeAmt,
             receipt_email: data.stripeEmail,
             customer: customer.id,
             description: "Sample Charge"
-          },
-          {
-            idempotency_key: data.stripeIdempotency
-          }
-        )
-        .then(result => {
-          console.log(`Charge created: ${result}`)
-        }, reason => {
-          console.log(`Charge issue:`, reason)
-        })
+      }, { idempotency_key: data.stripeIdempotency });
+
+      (async (charge, customer) => {
+        const chargeResp = await stripe.charges.create({
+          amount: charge.stripeAmt,
+          currency: 'usd',
+          description: 'Example charge',
+          source: charge.stripeToken,
+          receipt_email: charge.stripeEmail,
+          customer: customer.id,
+        },{ idempotency_key: charge.stripeIdempotency });
+        console.log(chargeResp);
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify(chargeResp)
+        }
+      })(data, customer);
     });
-  } catch (e) {
-    // exception
-  }
 }
