@@ -65,7 +65,7 @@
                     const payload = {
                         stripeEmail: 'one@somemail.com',
                         stripeAmt: 23,
-                        stripeToken: result.token,
+                        stripeToken: result.token.id,
                         stripeIdempotency: shortid.generate()
                     };
                     var requestInit = {
