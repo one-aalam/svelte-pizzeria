@@ -62,18 +62,17 @@
                 // Send the token to your server.
                 // stripeTokenHandler(result.token);
 
-                    const payload = {
-                        stripeEmail: 'one@somemail.com',
-                        stripeAmt: 23,
-                        stripeToken: result.token.id,
-                        stripeIdempotency: shortid.generate()
-                    };
                     var requestInit = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: payload
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: {
+                            stripeEmail: 'one@somemail.com',
+                            stripeAmt: 23,
+                            stripeToken: result.token.id,
+                            stripeIdempotency: shortid.generate()
+                        }
                     };
                     fetch('https://optimistic-euclid-892bac.netlify.com/.netlify/functions/index', requestInit)
                     .then(function(response) {
