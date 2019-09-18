@@ -73,7 +73,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify(payload)
+                    body: payload
                     };
                     fetch('https://optimistic-euclid-892bac.netlify.com/.netlify/functions/index', requestInit)
                     .then(function(response) {
