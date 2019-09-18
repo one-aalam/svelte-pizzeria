@@ -50,7 +50,7 @@ exports.handler = async (event, context, callback) => {
         customer: customer.id,
       },
       {
-        idempotency_key: data.idempotency_key
+        idempotency_key: data.stripeIdempotency
       }
     );
   } catch (e) {
