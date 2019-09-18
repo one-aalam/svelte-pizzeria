@@ -16,6 +16,7 @@
     const stripe = Stripe('pk_test_SjNnPE3k5y6TQegY3ln6vF1F00CS8Y2c0N');
     // Create an instance of Elements.
     const elements = stripe.elements();
+    let chargeAmount = 233;
 
     const style = {
         base: {
@@ -62,26 +63,13 @@
                 } else {
                 // Send the token to your server.
                 // stripeTokenHandler(result.token);
-
-                    var requestInit = {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: {
-                            stripeEmail: 'one@somemail.com',
-                            stripeAmt: 23,
-                            stripeToken: result.token.id,
-                            stripeIdempotency: shortid.generate()
-                        }
-                    };
                     try {
                         axios
                             .post(
                                 "https://optimistic-euclid-892bac.netlify.com/.netlify/functions/index",
                                 {
                                     stripeEmail: 'one@somemail.com',
-                                    stripeAmt: 23,
+                                    stripeAmt: chargeAmount,
                                     stripeToken: result.token.id,
                                     stripeIdempotency: shortid.generate()
                                 },
@@ -97,7 +85,7 @@
                                 }
                             });
                     } catch(err) {
-                        console.log(er)
+                        console.log(err)
                     }
                 }
             });
@@ -171,6 +159,7 @@
         <form action="/charge" method="post" id="payment-form">
             <div class="form-row">
                 <label for="card-element">Credit or debit card</label>
+                <input type="text" bind:value={chargeAmount}/>
                 <div id="card-element">
                     <!-- A Stripe Element will be inserted here. -->
                 </div>

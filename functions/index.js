@@ -11,7 +11,7 @@ const headers = {
   'Access-Control-Allow-Credentials': 'true'
 }
 
-exports.handler = (event, context) => {
+exports.handler = async(event, context) => {
   if (!event.body || event.httpMethod !== "POST") {
     return {
       statusCode: 400,
@@ -43,29 +43,14 @@ exports.handler = (event, context) => {
     })
     .then(customer => {
       console.log(`Customer created and starting the charges, amt: ${data.stripeAmt}, email: ${data.stripeEmail}`)
-      stripe.charges.create({
-            currency: "usd",
-            amount: data.stripeAmt,
-            receipt_email: data.stripeEmail,
-            customer: customer.id,
-            description: "Sample Charge"
-      }, { idempotency_key: data.stripeIdempotency });
 
-      (async (charge, customer) => {
-        const chargeResp = await stripe.charges.create({
-          amount: charge.stripeAmt,
+      return await stripe.charges.create({
+          amount: data.stripeAmt,
           currency: 'usd',
           description: 'Example charge',
-          source: charge.stripeToken,
-          receipt_email: charge.stripeEmail,
+          source: data.stripeToken,
+          receipt_email: data.stripeEmail,
           customer: customer.id,
-        },{ idempotency_key: charge.stripeIdempotency });
-        console.log(chargeResp);
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify(chargeResp)
-        }
-      })(data, customer);
+        },{ idempotency_key: data.stripeIdempotency });
     });
 }
