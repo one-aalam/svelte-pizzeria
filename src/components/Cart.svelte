@@ -9,6 +9,8 @@
 
     import { groupBy } from '../libs/utils';
     import { fetch } from '../libs/fetch';
+    import AppSubHeader from '../components/AppSubHeader.svelte';
+
     import PizzaListItem from './PizzaListItem.svelte';
 
     const stripe = Stripe('pk_test_SjNnPE3k5y6TQegY3ln6vF1F00CS8Y2c0N');
@@ -108,10 +110,6 @@
         $cart = [...itemsOtherThanId, ...restOfTheItemWithId];
     }
 
-    const pay = () => {
-        stripe.createToken(card).then(data => card.log(data))
-    }
-
 </script>
 
 <style>
@@ -122,7 +120,7 @@
 </style>
 
 <div class="pizza-list container mx-auto relative">
-    <button on:click={pay}>Pay With Stripe!</button>
+    <AppSubHeader/>
     {#each Object.entries(cartItemsByType) as [id, [item, ...rest]], index (id)}
         <div class="pizza-item">
             <PizzaListItem pizza={item} count={rest.length + 1} on:addPizza={addToCart} on:remPizza={remFromCart}/>

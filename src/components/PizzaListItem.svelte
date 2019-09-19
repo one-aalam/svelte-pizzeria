@@ -27,15 +27,16 @@
 
 </script>
 
-<div class="pizza-item max-w-sm w-full lg:max-w-full flex flex-row bg-gray-200 w-full rounded-sm p-4 px-16" transition:fly="{{ y: 20, duration: 300 }}">
-        <!-- pizza image -->
-        <div class="pizza-item__image flex-initial rounded-full h-48 w-48 shadow-md bg-gray-400 overflow-hidden">
-            <img class="object-cover h-48 w-full" src={`images/${pizza.image}`} title={pizza.name} alt={pizza.name} />
-        </div>
-        <div class="ml-24 flex flex-col justify-center">
-            <div class="pizza-item__name flex-initial flex-1 text-2xl bg-yellow-500 px-4 shadow-md font-bold text-center">{pizza.name}</div>
-        </div>
-        <div class="ml-24 flex flex-col justify-center"> 
+
+<div class="flex mb-4">
+  <div class="w-1/3 flex justify-center align-center py-6">
+    <!-- pizza image -->
+    <div class="pizza-item__image rounded-full h-24 w-24 shadow-md bg-gray-400 overflow-hidden">
+        <img class="object-cover h-24 w-24" src={`images/${pizza.image}`} title={pizza.name} alt={pizza.name} />
+    </div>
+  </div>
+  <div class="w-1/3 py-6">
+        <div class="pb-4">
             {#if count}
                 {#if allowOneOnly}
                     <button
@@ -68,10 +69,12 @@
                 </button>
             {/if}
         </div>
-        <div class="price-details ml-24 flex flex-col justify-center">
-            <div class="flex-initial flex-1 text-2xl bg-yellow-500 px-4  text-center">${price} x {count}</div>
-        </div>
-        <div class="price-details ml-24 flex flex-col justify-center">
-            <div class="flex-initial flex-1 text-2xl bg-yellow-500 px-4  text-center">${Math.round(price * count, 2)}</div>
-        </div>
+        <div class="pizza-item__name text-2xl bg-yellow-500 px-2 shadow-md font-bold">{pizza.name}</div>
+  </div>
+  <div class="w-1/3 py-6">
+    <div class="pizza-item__name text-2xl px-2 shadow-md font-bold"></div>
+    <div class="price-details">
+        <div class="text-2xl px-4 text-center">${price} x {count} &rarr; ${Math.round(price * count, 2)}</div>
+    </div>
+  </div>
 </div>

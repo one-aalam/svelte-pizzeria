@@ -46,7 +46,7 @@
                 <button
                     class:opacity-50={count}
                     class:cursor-not-allowed={count}
-                    class="mt-8 rounded-full px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-teal-600 text-white border-teal-500 hover:border-transparent  md:text-lg xl:text-base font-semibold leading-tight shadow-md"
+                    class="mt-8 rounded-full px-4 py-3 bg-teal-600 text-white border-teal-500 hover:border-transparent font-semibold leading-tight shadow-md"
                 >
                     added
                 </button>
@@ -55,7 +55,6 @@
                     <button on:click={remPizza} class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l-full">
                         <Icon data={minus}></Icon>
                     </button>
-                    <!-- <input class="px-4 py-3 w-16" type="text" bind:value={count} /> -->
                     <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                         {count}
                     </button>
@@ -66,11 +65,12 @@
             {/if}
         {:else}
             <button 
-                class="mt-8 rounded-full px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3  bg-transparent hover:bg-teal-600 hover:text-white border-teal-500 hover:border-transparent  md:text-lg xl:text-base font-semibold leading-tight shadow-md"
+                class="mt-8 rounded-full px-4 py-3 bg-transparent hover:bg-teal-600 hover:text-white border-teal-500 hover:border-transparent font-semibold leading-tight shadow-md"
                 on:click={addPizza}
             >
             <Icon data={plus}></Icon> buy
             </button>
         {/if}
+        <p class="py-4 text-gray-600 text-center">{pizza.description.length > 60 ? pizza.description.substr(0, 60) + '...' : pizza.description}</p>
 
 </div>
