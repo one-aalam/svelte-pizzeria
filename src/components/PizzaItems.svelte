@@ -4,7 +4,6 @@
     import { shoppingBag } from 'svelte-awesome/icons';
     import PizzaItem from './PizzaItem.svelte';
     export let items = [];
-    export let sizes = [];
 
     const cart = getContext('cart')
 

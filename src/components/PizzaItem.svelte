@@ -3,6 +3,7 @@
     import { plus, minus } from 'svelte-awesome/icons';
     import { createEventDispatcher } from 'svelte';
     import { fly } from 'svelte/transition';
+    import { pizzaSizes, saladSizes, drinkSizes } from '../libs/pizza';
 
     export let pizza = {};
     export let added;

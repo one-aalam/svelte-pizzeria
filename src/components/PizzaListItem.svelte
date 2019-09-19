@@ -36,6 +36,7 @@
     </div>
   </div>
   <div class="w-1/3 py-6">
+        <div class="pizza-item__name text-2xl px-2 font-bold">{pizza.name} <span class="inline-block bg-teal-500 text-white text-sm rounded-full px-2 py-2 font-normal">Huge 18</span></div>
         <div class="pb-4">
             {#if count}
                 {#if allowOneOnly}
@@ -69,12 +70,11 @@
                 </button>
             {/if}
         </div>
-        <div class="pizza-item__name text-2xl bg-yellow-500 px-2 shadow-md font-bold">{pizza.name}</div>
   </div>
   <div class="w-1/3 py-6">
     <div class="pizza-item__name text-2xl px-2 shadow-md font-bold"></div>
     <div class="price-details">
-        <div class="text-2xl px-4 text-center">${price} x {count} &rarr; ${Math.round(price * count, 2)}</div>
+        <div class="text-2xl px-4 text-right">${price} x {count} &rarr; ${Math.round(price * count, 2)}</div>
     </div>
   </div>
 </div>

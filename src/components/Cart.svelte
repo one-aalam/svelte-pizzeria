@@ -1,9 +1,7 @@
 <script>
-    import { getContext, onMount } from 'svelte';
+    import { getContext } from 'svelte';
     import { get, derived } from 'svelte/store';
     import { Link } from "svelte-routing";
-    import shortid from 'shortid';
-    import axios from 'axios';
     import Icon  from 'svelte-awesome/components/Icon.svelte';
     import { shoppingBag } from 'svelte-awesome/icons';
 
@@ -13,85 +11,7 @@
 
     import PizzaListItem from './PizzaListItem.svelte';
 
-    const stripe = Stripe('pk_test_SjNnPE3k5y6TQegY3ln6vF1F00CS8Y2c0N');
-    // Create an instance of Elements.
-    const elements = stripe.elements();
     let chargeAmount = 233;
-
-    const style = {
-        base: {
-            color: '#32325d',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
-            fontSize: '16px',
-            '::placeholder': {
-            color: '#aab7c4'
-            }
-        },
-        invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
-        }
-    };
-
-    // Create an instance of the card Element.
-    var card = elements.create('card', {style: style});
-
-    // Add an instance of the card Element into the `card-element` <div>.
-    onMount(() => {
-        card.mount('#card-element');
-        // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function(event) {
-        //var displayError = document.getElementById('card-errors');
-        if (event.error) {
-            // event.error.message;
-            // displayError.textContent = event.error.message;
-        } else {
-            // displayError.textContent = '';
-        }
-        });
-
-        var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        stripe.createToken(card).then(function(result) {
-                if (result.error) {
-                // Inform the user if there was an error.
-               //  var errorElement = document.getElementById('card-errors');
-                // errorElement.textContent = result.error.message;
-                } else {
-                // Send the token to your server.
-                // stripeTokenHandler(result.token);
-                    try {
-                        axios
-                            .post(
-                                "https://optimistic-euclid-892bac.netlify.com/.netlify/functions/index",
-                                {
-                                    stripeEmail: 'one@somemail.com',
-                                    stripeAmt: chargeAmount,
-                                    stripeToken: result.token.id,
-                                    stripeIdempotency: shortid.generate()
-                                },
-                                {
-                                    headers: {
-                                        "Content-Type": "application/json"
-                                    }
-                                }
-                            ).then(res => {
-                                console.log(res);
-                                if (res.status === 200) {
-                                    console.log(res)
-                                }
-                            });
-                    } catch(err) {
-                        console.log(err)
-                    }
-                }
-            });
-        });
-    });
-
     const to = '/'
     const groupById = groupBy('id');
 
@@ -136,19 +56,26 @@
             </Link>    
         </div>   
     {/each}
-    <div>
-        <form action="/charge" method="post" id="payment-form">
-            <div class="form-row">
-                <label for="card-element">Credit or debit card</label>
-                <input type="text" bind:value={chargeAmount}/>
-                <div id="card-element">
-                    <!-- A Stripe Element will be inserted here. -->
-                </div>
-                <!-- Used to display form errors. -->
-                <div id="card-errors" role="alert"></div>
+    {#if Object.entries(cartItemsByType).length}
+        <hr/>
+        <div class="flex mb-4">
+            <div class="w-1/3 py-6">
+                <button class="bg-transparent hover:bg-teal-500 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded">&larr; Continue Shopping</button>
             </div>
-            <button>Submit Payment</button>
-        </form>
-    </div>
+            <div class="w-1/3 py-6">
+                <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded">
+                    Apply Coupon!
+                </button>
+            </div>
+            <div class="w-1/3 py-6 flex flex-col">
+                <div class="text-2xl px-4 text-right">Sub-Total: $141.34</div>
+                <div class="text-2xl px-4 text-right">Delivery Charges: $141.34</div>
+                <div class="text-2xl px-4 text-right">Tax: $141.34</div>
+                <hr/>
+                <div class="text-2xl px-4 text-right">Total: $141.34</div>
+                <button class="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 border border-teal-700 rounded shadow">Checkout for $141.34 &rarr;</button>
+            </div>
+        </div>
+    {/if}
 </div>
 
