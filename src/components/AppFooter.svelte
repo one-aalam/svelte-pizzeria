@@ -5,4 +5,5 @@
             </h1>
         </div>
     </div>
+    <div>This project is open source on github, hosted with Netlify, and made with love by Aftab Alam(aalam.in), @aftabbuddy (twitter) & @one-aalam (github)</div>
 </div>
