@@ -1,5 +1,5 @@
 require("dotenv").config()
-
+const querystring = require("querystring");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const headers = {
@@ -12,7 +12,7 @@ const headers = {
 // 'Access-Control-Allow-Credentials': 'true'
 
 exports.handler = async (event, context, callback) => {
-  if (!event.body || event.httpMethod !== "POST") {
+  if (!event.body && event.httpMethod !== "POST") {
     return {
       statusCode: 400,
       headers,
@@ -24,7 +24,7 @@ exports.handler = async (event, context, callback) => {
   const body = {...event.body }
 
   console.log('event body', event.body);
-  const data = JSON.parse(body)
+  const data = querystring.parse(body)
   if (!data.stripeToken || !data.stripeAmt || !data.stripeIdempotency) {
     console.error("Required information is missing.")
 
