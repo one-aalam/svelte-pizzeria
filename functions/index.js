@@ -13,15 +13,11 @@ const headers = {
 exports.handler = async (event, context, callback) => {
   // In the case of a CORS preflight check, just return early.
   if (event.httpMethod === "OPTIONS") {
-    callback(
-        null,
-        {
-            statusCode: 200,
-            headers,
-            body: JSON.stringify( "OK" )
-        }
-    );
-    return;
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify( "OK" )
+    };
   }
   if (!event.body || event.httpMethod !== "POST") {
     return {
@@ -33,8 +29,9 @@ exports.handler = async (event, context, callback) => {
     };
   }
 
-  const data = querystring.parse(event.body)
+  const data = JSON.parse(event.body)
   if (!data.stripeToken || !data.stripeAmt || !data.stripeIdempotency) {
+    console.log(data);
     return {
       statusCode: 400,
       headers,
