@@ -83,7 +83,7 @@ exports.handler = async (event, context, callback) => {
   //   })
   // };
 
-  stripe.customers
+  return await stripe.customers
     .create({
       email: data.stripeEmail,
       source: data.stripeToken
@@ -98,18 +98,21 @@ exports.handler = async (event, context, callback) => {
       },{
         idempotency_key: data.stripeIdempotency
     }))
-    .then(charge => callback(null, {
-      statusCode: 200,
-      body: charge
-    }))
+    .then(charge => {
+      console.log('charged:', charge);
+      return {
+        statusCode: 200,
+        body: charge
+      }
+    })
     .catch(err => {
         console.log("Error:", err);
-        callback({
+        return {
           statusCode: 500,
           headers,
           body: JSON.stringify({
             status: "Purchase failed"
           })
-        })
-    });
+        }
+      });
 }
