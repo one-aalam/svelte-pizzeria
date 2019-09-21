@@ -7,27 +7,42 @@
 
     export let chargeAmount = 0;
 
+    // const style = {
+    //     base: {
+    //         color: '#32325d',
+    //         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+    //         fontSmoothing: 'antialiased',
+    //         fontSize: '16px',
+    //         '::placeholder': {
+    //             color: '#aab7c4'
+    //         }
+    //     },
+    //     invalid: {
+    //         color: '#fa755a',
+    //         iconColor: '#fa755a'
+    //     }
+    // };
+
     const style = {
         base: {
-            color: '#32325d',
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSmoothing: 'antialiased',
+            color: '#303238',
             fontSize: '16px',
+            fontFamily: '"Open Sans", sans-serif',
+            fontSmoothing: 'antialiased',
             '::placeholder': {
-                color: '#aab7c4'
-            }
+            color: '#CFD7DF',
+            },
         },
         invalid: {
-            color: '#fa755a',
-            iconColor: '#fa755a'
-        }
+            color: '#e5424d',
+            ':focus': {
+                color: '#303238',
+            },
+        },
     };
 
-    // Create an instance of Elements.
     const elements = stripe.elements();
-
-    // Create an instance of the card Element.
-    var card = elements.create('card', {style: style});
+    let card = elements.create('card', { style });
 
     // Add an instance of the card Element into the `card-element` <div>.
     onMount(() => {
@@ -87,14 +102,16 @@
 <div>
     <form action="/charge" method="post" id="payment-form">
         <div class="form-row">
-            <label for="card-element">Credit or debit card</label>
             <input type="text" bind:value={chargeAmount}/>
+            <label for="card-element">Credit or debit card</label>
             <div id="card-element">
                 <!-- A Stripe Element will be inserted here. -->
             </div>
             <!-- Used to display form errors. -->
             <div id="card-errors" role="alert"></div>
         </div>
-        <button>Submit Payment</button>
+        <button class="text-2xl inline-block bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 border-teal-700 rounded shadow text-right uppercase">
+            Pay <span class="px-2 inline-block text-gray-700 bg-green-400">$141.34</span>
+        </button>
     </form>
 </div>

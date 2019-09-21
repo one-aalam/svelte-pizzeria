@@ -22,8 +22,8 @@ exports.handler = async (event, context, callback) => {
     };
   }
 
+  console.log('event body', event.body);
   const data = JSON.parse(event.body)
-  console.log(data, event.body);
   if (!data.stripeToken || !data.stripeAmt || !data.stripeIdempotency) {
     console.error("Required information is missing.")
 

@@ -20,7 +20,7 @@
                     </li>
                     <li class="flex-1 mr-2 text-center text-xs text-gray-400">&rarr;</li>
                     <li class="flex-1 mr-2 text-center uppercase text-xs text-gray-500">
-                        <NavLink to="drinks">
+                        <NavLink to="/checkout">
                             Check Out
                         </NavLink>
                     </li>
