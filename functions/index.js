@@ -5,13 +5,14 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+  'Access-Control-Allow-Methods': '*'
 }
 // 'Content-Type': 'application/json',
-// 'Access-Control-Allow-Methods': '*',
 // 'Access-Control-Max-Age': '2592000',
 // 'Access-Control-Allow-Credentials': 'true'
 
 exports.handler = async (event, context, callback) => {
+  console.log('event body', event.body, event.httpMethod);
   if (!event.body || event.httpMethod !== "POST") {
     return {
       statusCode: 400,
