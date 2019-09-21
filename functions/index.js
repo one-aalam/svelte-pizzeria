@@ -1,5 +1,4 @@
 require("dotenv").config()
-const querystring = require("querystring");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const headers = {
@@ -31,7 +30,6 @@ exports.handler = async (event, context, callback) => {
 
   const data = JSON.parse(event.body)
   if (!data.stripeToken || !data.stripeAmt || !data.stripeIdempotency) {
-    console.log(data);
     return {
       statusCode: 400,
       headers,
@@ -40,48 +38,6 @@ exports.handler = async (event, context, callback) => {
       })
     };
   }
-
-  // let charge;
-
-  // try {
-  //   const customer = stripe.customers.create({ email: data.stripeEmail, source: data.stripeToken })
-  //   charge = await stripe.charges.create(
-  //     {
-  //       amount: data.stripeAmt,
-  //       currency: 'usd',
-  //       description: 'Example charge',
-  //       source: data.stripeToken,
-  //       receipt_email: data.stripeEmail,
-  //       customer: customer.id,
-  //     },
-  //     {
-  //       idempotency_key: data.stripeIdempotency
-  //     }
-  //   );
-  // } catch (e) {
-  //   let message = e.message;
-  
-  //   console.error(message);
-
-  //   return {
-  //     statusCode: 424,
-  //     headers,
-  //     body: JSON.stringify({
-  //       status: "failed",
-  //       message
-  //     })
-  //   };
-  // }
-
-  // const status = (charge === null || charge.status !== "succeeded") ? "failed" : charge.status;
-  // return {
-  //   statusCode,
-  //   headers,
-  //   body: JSON.stringify({
-  //     status,
-  //     message: "Charge successfully created!"
-  //   })
-  // };
 
   return await stripe.customers
     .create({
@@ -99,14 +55,12 @@ exports.handler = async (event, context, callback) => {
         idempotency_key: data.stripeIdempotency
     }))
     .then(charge => {
-      console.log('charged:', charge);
       return {
         statusCode: 200,
-        body: charge
+        body: JSON.stringify(charge)
       }
     })
     .catch(error => {
-        console.log("error:", error);
         const { code, type, statusCode } = error;
         return {
           statusCode: 500,
