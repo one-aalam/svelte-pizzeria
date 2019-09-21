@@ -12,7 +12,6 @@ const headers = {
 // 'Access-Control-Allow-Credentials': 'true'
 
 exports.handler = async (event, context, callback) => {
-  console.log('event body', event.body, event.httpMethod);
   if (!event.body || event.httpMethod !== "POST") {
     return {
       statusCode: 400,
@@ -22,9 +21,10 @@ exports.handler = async (event, context, callback) => {
       })
     };
   }
+  const body = {...event.body }
 
   console.log('event body', event.body);
-  const data = JSON.parse(event.body)
+  const data = JSON.parse(body)
   if (!data.stripeToken || !data.stripeAmt || !data.stripeIdempotency) {
     console.error("Required information is missing.")
 
