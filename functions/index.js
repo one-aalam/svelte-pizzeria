@@ -12,7 +12,19 @@ const headers = {
 // 'Access-Control-Allow-Credentials': 'true'
 
 exports.handler = async (event, context, callback) => {
-  if (!event.body && event.httpMethod !== "POST") {
+  // In the case of a CORS preflight check, just return early.
+  if ( event.httpMethod === "OPTIONS" ) {
+    callback(
+        null,
+        {
+            statusCode: 200,
+            headers: headers,
+            body: JSON.stringify( "OK" )
+        }
+    );
+    return;
+  }
+  if (!event.body || event.httpMethod !== "POST") {
     return {
       statusCode: 400,
       headers,
