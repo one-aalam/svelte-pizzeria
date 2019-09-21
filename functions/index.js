@@ -92,7 +92,7 @@ exports.handler = async (event, context, callback) => {
         amount: data.stripeAmt,
         currency: 'usd',
         description: 'Example charge',
-        source: data.stripeToken,
+        // source: data.stripeToken,
         receipt_email: data.stripeEmail,
         customer: customer.id,
       },{
@@ -105,13 +105,15 @@ exports.handler = async (event, context, callback) => {
         body: charge
       }
     })
-    .catch(err => {
-        console.log("Error:", err);
+    .catch(error => {
+        console.log("error:", error);
+        const { code, type, statusCode } = error;
         return {
           statusCode: 500,
           headers,
           body: JSON.stringify({
-            status: "Purchase failed"
+            status: "Purchase failed",
+            type
           })
         }
       });
