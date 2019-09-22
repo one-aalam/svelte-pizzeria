@@ -1,11 +1,9 @@
 <script>
     import PageLayout from '../components/PageLayout.svelte';
-    import StripeCard from '../components/StripeCard.svelte';
+    import Checkout from '../components/Checkout.svelte';
 
 </script>
 
 <PageLayout>
-   <div class="container mx-auto relative">
-        <StripeCard/>
-    </div>
+    <Checkout/>
 </PageLayout>

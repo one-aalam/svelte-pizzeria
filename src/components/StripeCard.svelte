@@ -7,45 +7,47 @@
 
     export let chargeAmount = 0;
 
-    // const style = {
-    //     base: {
-    //         color: '#32325d',
-    //         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    //         fontSmoothing: 'antialiased',
-    //         fontSize: '16px',
-    //         '::placeholder': {
-    //             color: '#aab7c4'
-    //         }
-    //     },
-    //     invalid: {
-    //         color: '#fa755a',
-    //         iconColor: '#fa755a'
-    //     }
-    // };
-
-    const style = {
-        base: {
-            color: '#303238',
-            fontSize: '16px',
-            fontFamily: '"Open Sans", sans-serif',
-            fontSmoothing: 'antialiased',
-            '::placeholder': {
-            color: '#CFD7DF',
-            },
-        },
-        invalid: {
-            color: '#e5424d',
-            ':focus': {
-                color: '#303238',
-            },
-        },
-    };
+            // Try to match bootstrap 4 styling
+        var style = {
+            base: {
+                'lineHeight': '1.35',
+                'fontSize': '1.11rem',
+                'color': '#495057',
+                'fontFamily': 'apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif'
+            }
+        };
 
     const elements = stripe.elements();
+
+        // Card number
+        // var card = elements.create('cardNumber', {
+        //     'placeholder': '',
+        //     'style': style
+        // });
+
+        // CVC
+        // var cvc = elements.create('cardCvc', {
+        //     'placeholder': '',
+        //     'style': style
+        // });
+
+        // Card expiry
+        // var exp = elements.create('cardExpiry', {
+        //     'placeholder': '',
+        //     'style': style
+        // });
+
+    
+
+
     let card = elements.create('card', { style });
 
     // Add an instance of the card Element into the `card-element` <div>.
     onMount(() => {
+        // card.mount('#card-number');
+        // cvc.mount('#card-cvc');
+        // exp.mount('#card-exp');
+        // 
         card.mount('#card-element');
         // Handle real-time validation errors from the card Element.
         card.addEventListener('change', function(event) {
@@ -99,19 +101,53 @@
     });
 </script>
 
+<style>
+    .CardField {
+        background-color: red;
+    }
+      /* Padding for Stripe Element containers */
+        .stripe-element-container {
+            padding-top: .55rem;
+            padding-bottom: .50rem;
+        }
+
+        /* Blue outline on focus */
+        .StripeElement--focus {
+            border-color: #80BDFF;
+            outline:0;
+            box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+            transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        }
+
+        #card-number.form-control,
+        #card-cvc.form-control,
+        #card-exp.form-control {
+            display:inline-block;
+        }
+
+</style>
+
 <div>
     <form action="/charge" method="post" id="payment-form">
         <div class="form-row">
-            <input type="text" bind:value={chargeAmount}/>
             <label for="card-element">Credit or debit card</label>
-            <div id="card-element">
+            <div id="card-element" style='height: 2.4em; padding-top: .7em;'>
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+            <div id="card-number" style='height: 2.4em; padding-top: .7em;'>
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+            <div id="card-cvc" style='height: 2.4em; padding-top: .7em;'>
+                <!-- A Stripe Element will be inserted here. -->
+            </div>
+            <div id="card-exp" style='height: 2.4em; padding-top: .7em;'>
                 <!-- A Stripe Element will be inserted here. -->
             </div>
             <!-- Used to display form errors. -->
             <div id="card-errors" role="alert"></div>
         </div>
-        <button class="text-2xl inline-block bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 border-teal-700 rounded shadow text-right uppercase">
+        <!-- <button class="text-2xl inline-block bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 border-teal-700 rounded shadow text-right uppercase">
             Pay <span class="px-2 inline-block text-gray-700 bg-green-400">$141.34</span>
-        </button>
+        </button> -->
     </form>
 </div>

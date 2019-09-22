@@ -69,7 +69,7 @@
                 class="mt-8 rounded-full px-4 py-3 bg-transparent hover:bg-teal-600 hover:text-white border-teal-500 hover:border-transparent font-semibold leading-tight shadow-md"
                 on:click={addPizza}
             >
-            <Icon data={plus}></Icon> buy
+            <Icon data={plus}></Icon> add to bag
             </button>
         {/if}
         <p class="py-4 text-gray-600 text-center">{pizza.description.length > 60 ? pizza.description.substr(0, 60) + '...' : pizza.description}</p>
